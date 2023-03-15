@@ -1,0 +1,5 @@
+server:
+  port: 9090
+
+logging:
+  config: G:/1_wjy/2023/Code/tacoCloud/src/main/resources/log4j.properties
