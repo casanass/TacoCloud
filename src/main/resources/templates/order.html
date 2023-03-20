@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Order</title>
+    <link rel="stylesheet" th:href="@{style.css}" />
+</head>
+
+<body>
+    <form method="POST" th:action="@{/order}" th:object="${order}">
+
+        <h1>Order your taco</h1>
+        <img th:src="@{/images/TacoCloud.png}" />
+
+        <h3>Your tacos in this order:</h3>
+        <a th:href="@{/taco}">Design another taco</a>
+        <ul>
+            <li th:each="taco: ${order.tacos}">
+                <span th:text="${taco.name}">Taco Name</span>
+            </li>
+        </ul>
+
+        <div th:if="${#fields.hasErrors()}">
+            <span class="validationError">
+                Please correct the porblems below and submit.
+            </span>
+        </div>
+        <br/>
+
+        <h3>Deliver message</h3>
+        <label>Name:</label>
+        <input type="text" th:field="*{orderName}" />
+        <span class="validationError"
+              th:if="${#fields.hasErrors('orderName')}"
+              th:errors="*{orderName}">Order Name Error</span>
+        <br/>
+
+        <label>street:</label>
+        <input type="text" th:field="*{orderStreet}" />
+        <span class="validationError"
+              th:if="${#fields.hasErrors('orderStreet')}"
+              th:errors="*{orderStreet}">street Error</span>
+        <br/>
+
+        <label>city:</label>
+        <input type="text" th:field="*{orderCity}" />
+        <span class="validationError"
+              th:if="${#fields.hasErrors('orderCity')}"
+              th:errors="*{orderCity}">city Error</span>
+        <br/>
+
+        <label>state:</label>
+        <input type="text" th:field="*{orderState}" />
+        <span class="validationError"
+              th:if="${#fields.hasErrors('orderState')}"
+              th:errors="*{orderState}">state Error</span>
+        <br/>
+
+        <label>ccNumber:</label>
+        <input type="text" th:field="*{orderCcNumber}" />
+        <span class="validationError"
+              th:if="${#fields.hasErrors('orderCcNumber')}"
+              th:errors="*{orderCcNumber}">ccNumber Error</span>
+        <br/>
+
+        <input type="submit" value="Submit order" />
+    </form>
+</body>
+</html>
